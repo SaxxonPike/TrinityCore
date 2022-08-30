@@ -24,5 +24,5 @@ void AddSC_AutoBalance();
 void AddCustomScripts()
 {
     // VAS AutoBalance
-    AddAutoBalanceScripts();
+    AddSC_AutoBalance();
 }
