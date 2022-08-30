@@ -19,7 +19,7 @@
 
 // The name of this function should match:
 // void Add${NameOfDirectory}Scripts()
-void AddAutoBalanceScripts();
+void AddSC_AutoBalance();
 
 void AddCustomScripts()
 {
