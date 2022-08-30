@@ -22,6 +22,5 @@ void AddSC_AutoBalance();
 // void Add${NameOfDirectory}Scripts()
 void AddCustomScripts()
 {
-    // VAS AutoBalance
     AddSC_AutoBalance();
 }
