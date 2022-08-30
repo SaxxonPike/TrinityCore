@@ -16,12 +16,12 @@
  */
 
 // This is where scripts' loading functions should be declared:
-void AddAutoBalanceScripts();
+void AddSC_AutoBalance();
 
 // The name of this function should match:
 // void Add${NameOfDirectory}Scripts()
 void AddCustomScripts()
 {
     // VAS AutoBalance
-    AddAutoBalanceScripts();
+    AddSC_AutoBalance();
 }
