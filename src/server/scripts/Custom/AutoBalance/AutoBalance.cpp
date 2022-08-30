@@ -769,7 +769,7 @@ public:
     }
 };
 
-void AddSC_AutoBalance() {
+void AddAutoBalanceScripts() {
     new AutoBalance_WorldScript;
     new AutoBalance_PlayerScript;
     new AutoBalance_UnitScript;
