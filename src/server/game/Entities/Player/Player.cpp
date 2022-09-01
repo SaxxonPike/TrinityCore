@@ -5640,8 +5640,6 @@ bool Player::UpdateSkill(uint32 skill_id, uint32 step)
 }
 
 int ProgressiveSkillGainChance(int32 SkillValue, int32 LowChance, int32 HighChance, int32 LowLevel, int32 HighLevel, int32 Coeff) {
-    // [Kelfor] Use a linear function for skillups instead of tiers.
-
     // This is a failsafe in case two tiers have equivalent cutoffs. We give the benefit of the higher rate here.
     int32 baseResult = LowChance * Coeff;
     if (HighLevel <= LowLevel)
@@ -5655,14 +5653,16 @@ int ProgressiveSkillGainChance(int32 SkillValue, int32 LowChance, int32 HighChan
     return baseResult + (chanceDelta * progress * Coeff / cutoffDelta);
 }
 
-int SkillGainChance(uint32 SkillValue, uint32 GrayLevel, uint32 GreenLevel, uint32 YellowLevel)
+inline int SkillGainChance(uint32 SkillValue, uint32 GrayLevel, uint32 GreenLevel, uint32 YellowLevel)
 {
+    // [Kelfor] Use a linear function for skillups instead of tiers.
+    // This has the side effect of ignoring values for yellow/green.
+    // TODO: Allow configuration of the curve.
+
     if (SkillValue >= GrayLevel)
         return sWorld->getIntConfig(CONFIG_SKILL_CHANCE_GREY)*10;
-    if (SkillValue >= GreenLevel)
-        return ProgressiveSkillGainChance(SkillValue, sWorld->getIntConfig(CONFIG_SKILL_CHANCE_YELLOW), sWorld->getIntConfig(CONFIG_SKILL_CHANCE_GREEN), GreenLevel, GrayLevel, 10);
     if (SkillValue >= YellowLevel)
-        return ProgressiveSkillGainChance(SkillValue, sWorld->getIntConfig(CONFIG_SKILL_CHANCE_ORANGE), sWorld->getIntConfig(CONFIG_SKILL_CHANCE_YELLOW), YellowLevel, GreenLevel, 10);
+        return ProgressiveSkillGainChance(SkillValue, sWorld->getIntConfig(CONFIG_SKILL_CHANCE_ORANGE), sWorld->getIntConfig(CONFIG_SKILL_CHANCE_GREY), YellowLevel, GrayLevel, 10);
     return sWorld->getIntConfig(CONFIG_SKILL_CHANCE_ORANGE)*10;
 }
 
