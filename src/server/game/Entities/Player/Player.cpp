@@ -5660,9 +5660,9 @@ int SkillGainChance(uint32 SkillValue, uint32 GrayLevel, uint32 GreenLevel, uint
     if (SkillValue >= GrayLevel)
         return sWorld->getIntConfig(CONFIG_SKILL_CHANCE_GREY)*10;
     if (SkillValue >= GreenLevel)
-        return ProgressiveSkillGainChance(SkillValue, GreenLevel, GrayLevel, sWorld->getIntConfig(CONFIG_SKILL_CHANCE_YELLOW), sWorld->getIntConfig(CONFIG_SKILL_CHANCE_GREEN), 10);
+        return ProgressiveSkillGainChance(SkillValue, sWorld->getIntConfig(CONFIG_SKILL_CHANCE_YELLOW), sWorld->getIntConfig(CONFIG_SKILL_CHANCE_GREEN), GreenLevel, GrayLevel, 10);
     if (SkillValue >= YellowLevel)
-        return ProgressiveSkillGainChance(SkillValue, YellowLevel, GreenLevel, sWorld->getIntConfig(CONFIG_SKILL_CHANCE_ORANGE), sWorld->getIntConfig(CONFIG_SKILL_CHANCE_YELLOW), 10);
+        return ProgressiveSkillGainChance(SkillValue, sWorld->getIntConfig(CONFIG_SKILL_CHANCE_ORANGE), sWorld->getIntConfig(CONFIG_SKILL_CHANCE_YELLOW), YellowLevel, GreenLevel, 10);
     return sWorld->getIntConfig(CONFIG_SKILL_CHANCE_ORANGE)*10;
 }
 
